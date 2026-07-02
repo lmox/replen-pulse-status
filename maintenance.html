@@ -75,9 +75,17 @@
         pointer-events: none;
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+          );
         background-size: 72px 72px;
-        -webkit-mask-image: radial-gradient(circle at 50% 35%, black, transparent 72%);
+        -webkit-mask-image: radial-gradient(
+          circle at 50% 35%,
+          black,
+          transparent 72%
+        );
         mask-image: radial-gradient(circle at 50% 35%, black, transparent 72%);
       }
 
@@ -115,8 +123,16 @@
         border-radius: 50%;
         position: relative;
         background:
-          radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9), transparent 11%),
-          radial-gradient(circle at center, rgba(56, 182, 255, 0.28), transparent 58%),
+          radial-gradient(
+            circle at 35% 35%,
+            rgba(255, 255, 255, 0.9),
+            transparent 11%
+          ),
+          radial-gradient(
+            circle at center,
+            rgba(56, 182, 255, 0.28),
+            transparent 58%
+          ),
           linear-gradient(135deg, #38b6ff, #0080ff);
         box-shadow:
           0 0 24px rgba(56, 182, 255, 0.35),
@@ -198,7 +214,11 @@
 
       .accent {
         display: inline-block;
-        background: linear-gradient(135deg, var(--rp-blue) 0%, var(--rp-blue-deep) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--rp-blue) 0%,
+          var(--rp-blue-deep) 100%
+        );
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -220,7 +240,11 @@
         border: 1px solid var(--rp-border-blue);
         border-radius: 20px;
         background:
-          linear-gradient(180deg, rgba(56, 182, 255, 0.13), rgba(255, 255, 255, 0.035)),
+          linear-gradient(
+            180deg,
+            rgba(56, 182, 255, 0.13),
+            rgba(255, 255, 255, 0.035)
+          ),
           var(--rp-surface);
         box-shadow:
           0 0 30px rgba(56, 182, 255, 0.16),
@@ -264,7 +288,11 @@
         width: 46%;
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(135deg, var(--rp-blue) 0%, var(--rp-blue-deep) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--rp-blue) 0%,
+          var(--rp-blue-deep) 100%
+        );
         box-shadow: 0 0 18px rgba(56, 182, 255, 0.6);
         animation: pulse 2.4s ease-in-out infinite;
       }
@@ -318,20 +346,15 @@
     <div class="page">
       <nav class="nav" aria-label="Site">
         <div class="nav-inner">
-          <div class="brand" aria-label="Replen Pulse">
-            <div class="brand-mark" aria-hidden="true"></div>
-            <div class="brand-name">Replen Pulse</div>
-          </div>
           <div class="status-pill">Scheduled Maintenance</div>
         </div>
       </nav>
 
       <main>
         <section class="hero" aria-labelledby="maintenance-title">
-          <p class="eyebrow">Inventory planning software for Amazon sellers</p>
-          <h1 id="maintenance-title">
+          <h1 id="accent">
             Replen Pulse is
-            <span class="accent">under maintenance</span>
+            <span class="maintenance-title">under maintenance</span>
           </h1>
           <p class="subtitle">
             We are making a scheduled update so purchasing, replenishment, and
