@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Replen Pulse Temporarily Unavailable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --rp-black: #000;
+        --rp-surface: rgba(255, 255, 255, 0.035);
+        --rp-border: rgba(255, 255, 255, 0.1);
+        --rp-border-blue: rgba(56, 182, 255, 0.35);
+        --rp-blue: #38b6ff;
+        --rp-blue-deep: #0080ff;
+        --rp-text: #fff;
+        --rp-muted: #ccc;
+        --rp-dim: #8c9099;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family:
+          "Oxanium",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--rp-black);
+        color: var(--rp-text);
+        overflow-x: hidden;
+      }
+
+      .page {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background:
+          radial-gradient(
+            circle at 18% 82%,
+            rgba(0, 191, 255, 0.14) 0%,
+            transparent 48%
+          ),
+          radial-gradient(
+            circle at 84% 18%,
+            rgba(0, 128, 255, 0.16) 0%,
+            transparent 46%
+          ),
+          #000;
+      }
+
+      .page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+          );
+        background-size: 72px 72px;
+        -webkit-mask-image: radial-gradient(
+          circle at 50% 35%,
+          black,
+          transparent 72%
+        );
+        mask-image: radial-gradient(circle at 50% 35%, black, transparent 72%);
+      }
+
+      .nav {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        border-bottom: 1px solid var(--rp-border);
+        background: rgba(0, 0, 0, 0.9);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .nav-inner {
+        width: min(1400px, 100%);
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        position: relative;
+        background:
+          radial-gradient(
+            circle at 35% 35%,
+            rgba(255, 255, 255, 0.9),
+            transparent 11%
+          ),
+          radial-gradient(
+            circle at center,
+            rgba(56, 182, 255, 0.28),
+            transparent 58%
+          ),
+          linear-gradient(135deg, #38b6ff, #0080ff);
+        box-shadow:
+          0 0 24px rgba(56, 182, 255, 0.35),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        left: 11px;
+        right: 11px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.72);
+      }
+
+      .brand-mark::before {
+        top: 17px;
+        height: 4px;
+      }
+
+      .brand-mark::after {
+        top: 27px;
+        height: 4px;
+        right: 18px;
+      }
+
+      .brand-name {
+        color: var(--rp-blue-deep);
+        font-size: clamp(1.15rem, 4vw, 1.5rem);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .status-pill {
+        border: 1px solid var(--rp-border-blue);
+        border-radius: 999px;
+        padding: 0.55rem 0.85rem;
+        color: var(--rp-blue);
+        background: rgba(56, 182, 255, 0.08);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: grid;
+        place-items: center;
+        padding: 5rem 2rem 4rem;
+      }
+
+      .hero {
+        width: min(920px, 100%);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--rp-text);
+        font-size: clamp(2.45rem, 7.5vw, 5rem);
+        font-weight: 800;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+
+      .deep-blue {
+        color: var(--rp-blue-deep);
+      }
+
+      .accent {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--rp-blue) 0%,
+          var(--rp-blue-deep) 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .error-card {
+        width: min(680px, 100%);
+        margin: 2.5rem auto 0;
+        padding: clamp(1.5rem, 4vw, 2.25rem);
+        border: 1px solid var(--rp-border-blue);
+        border-radius: 20px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(56, 182, 255, 0.13),
+            rgba(255, 255, 255, 0.035)
+          ),
+          var(--rp-surface);
+        box-shadow:
+          0 0 30px rgba(56, 182, 255, 0.16),
+          0 24px 70px rgba(0, 0, 0, 0.45);
+      }
+
+      .message {
+        margin: 0;
+        color: var(--rp-muted);
+        font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+        line-height: 1.65;
+        text-wrap: balance;
+      }
+
+      .message + .message {
+        margin-top: 1rem;
+      }
+
+      .signal {
+        position: relative;
+        width: min(420px, 100%);
+        height: 128px;
+        margin: 2rem auto 0;
+        overflow: hidden;
+        border: 1px solid rgba(56, 182, 255, 0.22);
+        border-radius: 20px;
+        background:
+          linear-gradient(90deg, rgba(56, 182, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          rgba(255, 255, 255, 0.025);
+        background-size: 44px 44px;
+      }
+
+      .signal::before,
+      .signal::after {
+        content: "";
+        position: absolute;
+        inset: 50% auto auto 50%;
+        border: 1px solid rgba(56, 182, 255, 0.28);
+        border-radius: 42% 58% 48% 52%;
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      .signal::before {
+        width: 190px;
+        height: 190px;
+        animation: orbit-rotate 8s linear infinite;
+      }
+
+      .signal::after {
+        width: 96px;
+        height: 96px;
+        border-color: rgba(0, 128, 255, 0.34);
+        animation: orbit-rotate 5s linear infinite reverse;
+      }
+
+      .signal-core {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        width: 54px;
+        height: 54px;
+        border: 1px solid rgba(56, 182, 255, 0.42);
+        border-radius: 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(56, 182, 255, 0.34),
+          rgba(0, 128, 255, 0.18)
+        );
+        box-shadow:
+          0 0 24px rgba(56, 182, 255, 0.22),
+          inset 0 0 18px rgba(255, 255, 255, 0.08);
+        transform: translate(-50%, -50%);
+        animation: core-breathe 2.8s ease-in-out infinite;
+      }
+
+      .signal-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: var(--rp-blue);
+        box-shadow: 0 0 22px rgba(56, 182, 255, 0.9);
+        animation: dot-orbit 4.2s linear infinite;
+      }
+
+      .signal-dot:nth-child(2) {
+        width: 9px;
+        height: 9px;
+        background: var(--rp-blue-deep);
+        animation-duration: 5.6s;
+        animation-direction: reverse;
+      }
+
+      .footer {
+        position: relative;
+        z-index: 1;
+        padding: 1.5rem 2rem 2rem;
+        color: #666;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      @keyframes orbit-rotate {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      @keyframes dot-orbit {
+        from {
+          transform: rotate(0deg) translateX(84px) rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg) translateX(84px) rotate(-360deg);
+        }
+      }
+
+      @keyframes core-breathe {
+        0%,
+        100% {
+          opacity: 0.82;
+          transform: translate(-50%, -50%) scale(0.94) rotate(0deg);
+        }
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.04) rotate(8deg);
+        }
+      }
+
+      @media (max-width: 620px) {
+        .nav-inner {
+          padding: 0.85rem 1rem;
+        }
+
+        .brand-mark {
+          width: 40px;
+          height: 40px;
+        }
+
+        .status-pill {
+          display: none;
+        }
+
+        main {
+          padding: 4rem 1rem 3rem;
+        }
+
+        .error-card {
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="nav" aria-label="Site">
+        <div class="nav-inner">
+          <div class="brand" aria-label="Replen Pulse">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <div class="brand-name">Replen Pulse</div>
+          </div>
+          <div class="status-pill">Service Notice</div>
+        </div>
+      </nav>
+
+      <main>
+        <section class="hero" aria-labelledby="error-title">
+          <h1 id="error-title">
+            <span class="deep-blue">Replen Pulse</span> is
+            <span class="accent">temporarily unavailable</span>
+          </h1>
+
+          <div class="error-card" role="status" aria-live="polite">
+            <p class="message">
+              We&rsquo;re aware of the issue and are working to restore service.
+            </p>
+            <p class="message">Please try again shortly.</p>
+
+            <div class="signal" aria-hidden="true">
+              <span class="signal-dot"></span>
+              <span class="signal-dot"></span>
+              <span class="signal-core"></span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        &copy; 2026 <span class="deep-blue">Replen Pulse</span>
+      </footer>
+    </div>
+  </body>
+</html>
