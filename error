@@ -16,6 +16,7 @@
         color-scheme: dark;
         --rp-black: #000;
         --rp-surface: rgba(255, 255, 255, 0.035);
+        --rp-surface-strong: rgba(56, 182, 255, 0.1);
         --rp-border: rgba(255, 255, 255, 0.1);
         --rp-border-blue: rgba(56, 182, 255, 0.35);
         --rp-blue: #38b6ff;
@@ -193,17 +194,22 @@
         text-align: center;
       }
 
+      .eyebrow {
+        margin: 0 0 1rem;
+        color: var(--rp-blue);
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
       h1 {
         margin: 0;
         color: var(--rp-text);
-        font-size: clamp(2.45rem, 7.5vw, 5rem);
+        font-size: clamp(2.5rem, 8vw, 5.5rem);
         font-weight: 800;
         line-height: 1.04;
         text-wrap: balance;
-      }
-
-      .deep-blue {
-        color: var(--rp-blue-deep);
       }
 
       .accent {
@@ -218,10 +224,23 @@
         -webkit-text-fill-color: transparent;
       }
 
+      .deep-blue {
+        color: var(--rp-blue-deep);
+      }
+
+      .subtitle {
+        max-width: 680px;
+        margin: 1.35rem auto 0;
+        color: var(--rp-muted);
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        line-height: 1.65;
+        text-wrap: balance;
+      }
+
       .error-card {
-        width: min(680px, 100%);
+        width: min(660px, 100%);
         margin: 2.5rem auto 0;
-        padding: clamp(1.5rem, 4vw, 2.25rem);
+        padding: clamp(1.25rem, 4vw, 2rem);
         border: 1px solid var(--rp-border-blue);
         border-radius: 20px;
         background:
@@ -236,93 +255,333 @@
           0 24px 70px rgba(0, 0, 0, 0.45);
       }
 
-      .message {
+      .time-label {
+        margin: 0 0 0.55rem;
+        color: var(--rp-dim);
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .time {
         margin: 0;
+        color: var(--rp-text);
+        font-size: clamp(1.7rem, 6vw, 3rem);
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .note {
+        margin: 1rem 0 0;
         color: var(--rp-muted);
-        font-size: clamp(1.05rem, 2.5vw, 1.25rem);
-        line-height: 1.65;
-        text-wrap: balance;
+        font-size: 1rem;
+        line-height: 1.55;
       }
 
-      .message + .message {
-        margin-top: 1rem;
+      .visual-divider {
+        margin: 2rem auto 1rem;
+        color: var(--rp-dim);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
       }
 
-      .signal {
+      .logistics-scene {
         position: relative;
-        width: min(420px, 100%);
-        height: 128px;
-        margin: 2rem auto 0;
+        width: min(560px, 100%);
+        height: 174px;
+        margin: 0 auto;
         overflow: hidden;
         border: 1px solid rgba(56, 182, 255, 0.22);
         border-radius: 20px;
         background:
-          linear-gradient(90deg, rgba(56, 182, 255, 0.06) 1px, transparent 1px),
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(56, 182, 255, 0.055) 1px,
+            transparent 1px
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
           rgba(255, 255, 255, 0.025);
-        background-size: 44px 44px;
+        background-size: 46px 46px;
       }
 
-      .signal::before,
-      .signal::after {
+      .dock-door {
+        position: absolute;
+        right: 524px;
+        bottom: 38px;
+        width: 76px;
+        height: 192px;
+        border: 1px solid rgba(56, 182, 255, 0.3);
+        border-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(56, 182, 255, 0.09) 0 8px,
+            rgba(0, 0, 0, 0.08) 8px 12px
+          ),
+          rgba(0, 128, 255, 0.06);
+      }
+
+      .dock-floor {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 36px;
+        height: 2px;
+        background: rgba(56, 182, 255, 0.24);
+        box-shadow: 0 0 18px rgba(56, 182, 255, 0.18);
+      }
+
+      .truck {
+        position: absolute;
+        right: -130px;
+        bottom: 38px;
+        width: 280px;
+        height: 78px;
+        animation: truck-back-in 12s ease-out infinite;
+      }
+
+      .trailer {
+        position: absolute;
+        left: 0;
+        bottom: 15px;
+        width: 198px;
+        height: 58px;
+        border: 1px solid rgba(56, 182, 255, 0.32);
+        border-radius: 8px 4px 4px 8px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(56, 182, 255, 0.2),
+            rgba(0, 128, 255, 0.08)
+          ),
+          rgba(255, 255, 255, 0.04);
+      }
+
+      .trailer::before {
         content: "";
         position: absolute;
-        inset: 50% auto auto 50%;
-        border: 1px solid rgba(56, 182, 255, 0.28);
-        border-radius: 42% 58% 48% 52%;
-        transform: translate(-50%, -50%) rotate(0deg);
+        inset: 12px 14px auto auto;
+        width: 34px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.24);
       }
 
-      .signal::before {
-        width: 190px;
-        height: 190px;
-        animation: orbit-rotate 8s linear infinite;
-      }
-
-      .signal::after {
-        width: 96px;
-        height: 96px;
-        border-color: rgba(0, 128, 255, 0.34);
-        animation: orbit-rotate 5s linear infinite reverse;
-      }
-
-      .signal-core {
+      .cab {
         position: absolute;
-        inset: 50% auto auto 50%;
-        width: 54px;
-        height: 54px;
-        border: 1px solid rgba(56, 182, 255, 0.42);
-        border-radius: 16px;
+        right: 0;
+        bottom: 15px;
+        width: 74px;
+        height: 52px;
+        border: 1px solid rgba(56, 182, 255, 0.36);
+        border-radius: 10px 12px 6px 4px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(56, 182, 255, 0.28),
+            rgba(0, 128, 255, 0.12)
+          ),
+          rgba(255, 255, 255, 0.04);
+      }
+
+      .cab::before {
+        content: "";
+        position: absolute;
+        top: 9px;
+        right: 12px;
+        width: 22px;
+        height: 14px;
+        border-radius: 4px 6px 3px 3px;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .reverse-light {
+        position: absolute;
+        left: 2px;
+        bottom: 28px;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+        animation: reverse-blink 1s steps(2, end) infinite;
+      }
+
+      .wheel {
+        position: absolute;
+        bottom: 4px;
+        width: 20px;
+        height: 20px;
+        border: 4px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.62);
+      }
+
+      .wheel-one {
+        left: 32px;
+      }
+
+      .wheel-two {
+        left: 166px;
+      }
+
+      .wheel-three {
+        right: 22px;
+      }
+
+      .forklift {
+        position: absolute;
+        left: -120px;
+        bottom: 38px;
+        width: 96px;
+        height: 58px;
+        animation: forklift-run 12s ease-in-out infinite;
+      }
+
+      .forks {
+        position: absolute;
+        /* left: 0px; */
+        /* bottom: 38px; */
+        /* width: 96px; */
+        /* height: 58px; */
+        animation: forks-move 12s ease-in-out infinite;
+      }
+
+      .forklift-body {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        width: 48px;
+        height: 28px;
+        border: 1px solid rgba(56, 182, 255, 0.34);
+        border-radius: 8px 8px 5px 5px;
         background: linear-gradient(
           135deg,
-          rgba(56, 182, 255, 0.34),
-          rgba(0, 128, 255, 0.18)
+          rgba(56, 182, 255, 0.28),
+          rgba(0, 128, 255, 0.16)
         );
-        box-shadow:
-          0 0 24px rgba(56, 182, 255, 0.22),
-          inset 0 0 18px rgba(255, 255, 255, 0.08);
-        transform: translate(-50%, -50%);
-        animation: core-breathe 2.8s ease-in-out infinite;
       }
 
-      .signal-dot {
+      .forklift-cage {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 12px;
-        height: 12px;
-        border-radius: 999px;
-        background: var(--rp-blue);
-        box-shadow: 0 0 22px rgba(56, 182, 255, 0.9);
-        animation: dot-orbit 4.2s linear infinite;
+        left: 34px;
+        bottom: 36px;
+        width: 25px;
+        height: 28px;
+        border: 2px solid rgba(56, 182, 255, 0.3);
+        border-bottom: 0;
+        border-radius: 6px 6px 0 0;
       }
 
-      .signal-dot:nth-child(2) {
-        width: 9px;
-        height: 9px;
-        background: var(--rp-blue-deep);
-        animation-duration: 5.6s;
-        animation-direction: reverse;
+      .forklift-mast {
+        position: absolute;
+        right: 20px;
+        bottom: 11px;
+        width: 4px;
+        height: 50px;
+        border-radius: 999px;
+        background: rgba(56, 182, 255, 0.45);
+      }
+
+      .forks {
+        position: absolute;
+        right: -6px;
+        bottom: 5px;
+        width: 34px;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      /* .forks::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        right: 0;
+        width: 34px;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.5);
+      } */
+
+      .forklift-wheel {
+        position: absolute;
+        bottom: 4px;
+        width: 16px;
+        height: 16px;
+        border: 3px solid rgba(255, 255, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.68);
+      }
+
+      .forklift-wheel.front {
+        right: 20px;
+      }
+
+      .forklift-wheel.back {
+        left: 16px;
+      }
+
+      .cargo-stack {
+        position: absolute;
+        right: -8px;
+        bottom: 29px;
+        width: 28px;
+        height: 72px;
+        animation: stack-visibility 12s steps(1, end) infinite;
+      }
+
+      .cargo-box {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 26px;
+        height: 24px;
+        border: 1px solid rgba(56, 182, 255, 0.32);
+        border-radius: 4px;
+        background:
+          linear-gradient(
+            90deg,
+            transparent 47%,
+            rgba(255, 255, 255, 0.18) 47% 53%,
+            transparent 53%
+          ),
+          linear-gradient(
+            135deg,
+            rgba(56, 182, 255, 0.24),
+            rgba(0, 128, 255, 0.12)
+          );
+        box-shadow: 0 0 14px rgba(56, 182, 255, 0.18);
+      }
+
+      .cargo-box.middle,
+      .cargo-box.top {
+        bottom: 22px;
+        opacity: 0;
+      }
+
+      .cargo-box.top {
+        bottom: 22px;
+      }
+
+      .cargo-box.base {
+        animation: base-box-load 12s steps(1, end) infinite;
+      }
+
+      .cargo-box.middle {
+        animation:
+          middle-box-load 12s steps(1, end) infinite,
+          middle-box-wobble 12s ease-in-out infinite;
+      }
+
+      .cargo-box.top {
+        animation:
+          top-box-load 12s steps(1, end) infinite,
+          top-box-wobble 12s ease-in-out infinite;
       }
 
       .footer {
@@ -334,30 +593,143 @@
         font-size: 0.9rem;
       }
 
-      @keyframes orbit-rotate {
-        to {
-          transform: translate(-50%, -50%) rotate(360deg);
+      @keyframes truck-back-in {
+        0%,
+        10% {
+          transform: translateX(150px);
+        }
+        36%,
+        80% {
+          transform: translateX(-150px);
+        }
+        90%,
+        100% {
+          transform: translateX(150px);
         }
       }
 
-      @keyframes dot-orbit {
-        from {
-          transform: rotate(0deg) translateX(84px) rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg) translateX(84px) rotate(-360deg);
-        }
-      }
-
-      @keyframes core-breathe {
+      @keyframes reverse-blink {
         0%,
         100% {
-          opacity: 0.82;
-          transform: translate(-50%, -50%) scale(0.94) rotate(0deg);
+          opacity: 0.28;
         }
         50% {
           opacity: 1;
-          transform: translate(-50%, -50%) scale(1.04) rotate(8deg);
+        }
+      }
+
+      @keyframes forklift-run {
+        0%,
+        36% {
+          transform: translateX(0);
+        }
+        50%,
+        57% {
+          transform: translateX(275px);
+        }
+        78%,
+        100% {
+          transform: translateX(0px);
+        }
+      }
+      @keyframes forks-move {
+        0%,
+        45% {
+          transform: translateY(0px);
+        }
+        48%,
+        100% {
+          transform: translateY(-20px);
+        }
+
+        /* 50%,
+        57% {
+          transform: translateY(-20px);
+        }
+        78%,
+        100% {
+          transform: translateY(-20px);
+        } */
+      }
+
+      @keyframes stack-visibility {
+        0%,
+        48% {
+          opacity: 0;
+        }
+        49%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes base-box-load {
+        0%,
+        48% {
+          opacity: 0;
+        }
+        49%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes middle-box-load {
+        0%,
+        52% {
+          opacity: 0;
+        }
+        53%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes top-box-load {
+        0%,
+        56% {
+          opacity: 0;
+        }
+        57%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes middle-box-wobble {
+        0%,
+        66% {
+          transform: rotate(0deg);
+        }
+        62% {
+          transform: rotate(-3deg) translateX(-3px);
+        }
+        68% {
+          transform: rotate(3deg) translateX(3px);
+        }
+        84%,
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      @keyframes top-box-wobble {
+        0%,
+        66% {
+          transform: rotate(0deg);
+        }
+        61% {
+          transform: rotate(7deg) translateX(6px);
+        }
+        67% {
+          transform: rotate(-8deg) translateX(-6px);
+        }
+        73% {
+          transform: rotate(5deg) translateX(8px);
+        }
+        90%,
+        100% {
+          transform: rotate(0deg);
         }
       }
 
@@ -389,10 +761,6 @@
     <div class="page">
       <nav class="nav" aria-label="Site">
         <div class="nav-inner">
-          <div class="brand" aria-label="Replen Pulse">
-            <div class="brand-mark" aria-hidden="true"></div>
-            <div class="brand-name">Replen Pulse</div>
-          </div>
           <div class="status-pill">Service Notice</div>
         </div>
       </nav>
@@ -400,20 +768,41 @@
       <main>
         <section class="hero" aria-labelledby="error-title">
           <h1 id="error-title">
-            <span class="deep-blue">Replen Pulse</span> is
-            <span class="accent">temporarily unavailable</span>
+            <span class="deep-blue">Replen Pulse</span> is temporarily
+            unavailable
           </h1>
+          <p class="subtitle">
+            We&rsquo;re aware of the issue and are working to restore service.
+          </p>
 
           <div class="error-card" role="status" aria-live="polite">
-            <p class="message">
-              We&rsquo;re aware of the issue and are working to restore service.
-            </p>
-            <p class="message">Please try again shortly.</p>
-
-            <div class="signal" aria-hidden="true">
-              <span class="signal-dot"></span>
-              <span class="signal-dot"></span>
-              <span class="signal-core"></span>
+            <p class="note">Please try again shortly.</p>
+            <div class="logistics-scene" aria-hidden="true">
+              <span class="dock-door"></span>
+              <span class="dock-floor"></span>
+              <span class="truck">
+                <span class="trailer"></span>
+                <span class="cab"></span>
+                <span class="reverse-light"></span>
+                <span class="wheel wheel-one"></span>
+                <span class="wheel wheel-two"></span>
+                <span class="wheel wheel-three"></span>
+              </span>
+              <span class="forklift">
+                <span class="forklift-cage"></span>
+                <span class="forklift-body"></span>
+                <span class="forklift-mast"></span>
+                <span class="forks"></span>
+                <span class="cargo-stack">
+                  <span class="cargo-box base">
+                    <span class="cargo-box middle">
+                      <span class="cargo-box top"></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="forklift-wheel front"></span>
+                <span class="forklift-wheel back"></span>
+              </span>
             </div>
           </div>
         </section>
